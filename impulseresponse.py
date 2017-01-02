@@ -44,4 +44,4 @@ for chan in [0, 1]:
 h = h[:10 * sr,:]
 h *= ratio(dB=40)
 
-wavfile.write('IR.wav', sr, h, normalized=True)
+wavfile.write('IR.wav', sr, h, normalized=True, bitrate=24)
