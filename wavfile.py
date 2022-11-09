@@ -80,7 +80,7 @@ def _read_data_chunk(fid, noc, bits, normalized=False):
     data = numpy.fromfile(fid, dtype=dtype, count=size//bytes)
     
     if bits == 24:
-        a = numpy.empty((len(data)/3, 4), dtype='u1')
+        a = numpy.empty((len(data)//3, 4), dtype='u1')
         a[:, :3] = data.reshape((-1, 3))
         a[:, 3:] = (a[:, 3 - 1:3] >> 7) * 255
         data = a.view('<i4').reshape(a.shape[:-1])
@@ -92,7 +92,7 @@ def _read_data_chunk(fid, noc, bits, normalized=False):
       fid.seek(1,1)    
 
     if normalized:
-        if bits == 8 or bits == 16 or bits == 24: 
+        if bits == 8 or bits == 16 or bits == 24 or bits == 32: 
             normfactor = 2 ** (bits-1)
         data = numpy.float32(data) * 1.0 / normfactor
 
